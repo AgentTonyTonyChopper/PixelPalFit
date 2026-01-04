@@ -20,6 +20,8 @@
     <string>$(CURRENT_PROJECT_VERSION)</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
+    <key>NSSupportsLiveActivities</key>
+    <true/>
     <key>NSHealthShareUsageDescription</key>
     <string>Pixel Pal uses your step count to reflect your daily activity vitality in your avatar.</string>
     <key>NSHealthUpdateUsageDescription</key>

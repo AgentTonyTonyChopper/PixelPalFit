@@ -1,59 +1,54 @@
 import Foundation
 
-enum AvatarState: String, Codable {
-    case vital
-    case neutral
-    case lowEnergy
-    
-    var description: String {
+// MARK: - Gender
+
+enum Gender: String, Codable, CaseIterable {
+    case male
+    case female
+
+    var displayName: String {
         switch self {
-        case .vital: return "Vital"
-        case .neutral: return "Neutral"
-        case .lowEnergy: return "Low Energy"
+        case .male: return "Male"
+        case .female: return "Female"
         }
     }
 }
 
+// MARK: - Avatar State
+
+enum AvatarState: String, Codable {
+    case vital
+    case neutral
+    case low
+
+    var description: String {
+        switch self {
+        case .vital: return "Vital"
+        case .neutral: return "Neutral"
+        case .low: return "Low Energy"
+        }
+    }
+}
+
+// MARK: - Avatar Logic
+
 struct AvatarLogic {
-    /// Determines the avatar state based on current steps vs baseline and time of day.
-    /// - Parameters:
-    ///   - currentSteps: Steps taken today.
-    ///   - baselineSteps: Average daily steps (e.g., last 7 days).
-    ///   - date: Current date/time.
+    /// Determines the avatar state based on current steps using simple fixed thresholds.
+    /// - Parameter steps: Steps taken today.
     /// - Returns: Calculated AvatarState.
-    static func determineState(currentSteps: Double, baselineSteps: Double, date: Date = Date()) -> AvatarState {
-        // If baseline is 0 (new user), assume a default target, e.g., 5000
-        let effectiveBaseline = baselineSteps > 0 ? baselineSteps : 5000.0
-        
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        
-        // Simple pacing logic:
-        // By hour X, you should ideally have (X/16) * baseline steps (assuming active hours 7am-11pm)
-        // We'll be more lenient.
-        
-        // Early morning (before 8am): Neutral unless already active
-        if hour < 8 {
-            return currentSteps > 100 ? .vital : .neutral
-        }
-        
-        // Calculate expected progress
-        // Active day assumed 8am to 8pm (12 hours) for simplicity in MVP
-        let activeHoursPassed = Double(max(0, min(12, hour - 8)))
-        let expectedRatio = activeHoursPassed / 12.0
-        let expectedSteps = effectiveBaseline * expectedRatio
-        
-        // Thresholds
-        // If > 110% of expected -> Vital
-        // If > 70% of expected -> Neutral
-        // Else -> Low Energy
-        
-        if currentSteps >= (expectedSteps * 1.1) {
-            return .vital
-        } else if currentSteps >= (expectedSteps * 0.7) {
+    static func determineState(steps: Int) -> AvatarState {
+        switch steps {
+        case 0..<2000:
+            return .low
+        case 2000..<7500:
             return .neutral
-        } else {
-            return .lowEnergy
+        default:
+            return .vital
         }
+    }
+
+    /// Convenience overload for Double step counts.
+    static func determineState(steps: Double) -> AvatarState {
+        return determineState(steps: Int(steps))
     }
 }

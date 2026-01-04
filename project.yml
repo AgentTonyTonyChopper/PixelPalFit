@@ -51,6 +51,8 @@ targets:
       - path: PixelPalWidget/Resources
       - path: PixelPal/Sources/Core/AvatarState.swift
       - path: PixelPal/Sources/Core/SharedData.swift
+      - path: PixelPal/Sources/Core/SpriteAssets.swift
+      - path: PixelPal/Sources/Core/PixelPalAttributes.swift
       - path: PixelPal/Resources/Assets.xcassets
     settings:
       base:

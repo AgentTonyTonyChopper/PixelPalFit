@@ -44,40 +44,40 @@ private struct LockScreenView: View {
     let context: ActivityViewContext<PixelPalAttributes>
 
     var body: some View {
-        TimelineView(.periodic(every: 0.8)) { timeline in
-            let frame = frameNumber(from: timeline.date)
-            let spriteName = SpriteAssets.spriteName(
-                genderRaw: context.state.genderRaw,
-                stateRaw: context.state.stateRaw,
-                frame: frame
-            )
+        let spriteName = SpriteAssets.spriteName(
+            genderRaw: context.state.genderRaw,
+            stateRaw: context.state.stateRaw,
+            frame: context.state.frame
+        )
 
-            HStack(spacing: 16) {
-                Image(spriteName)
+        HStack(spacing: 16) {
+            if let uiImage = UIImage(named: spriteName) {
+                Image(uiImage: uiImage)
                     .interpolation(.none)
                     .resizable()
                     .scaledToFit()
                     .frame(width: 50, height: 50)
-
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("\(context.state.steps) steps")
-                        .font(.headline)
-                        .foregroundColor(.white)
-
-                    Text(context.state.stateRaw.capitalized)
-                        .font(.caption)
-                        .foregroundColor(.white.opacity(0.7))
-                }
-
-                Spacer()
+            } else {
+                // Fallback colored square if image not found
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color.blue)
+                    .frame(width: 50, height: 50)
             }
-            .padding()
-        }
-        .activityBackgroundTint(.black)
-    }
 
-    private func frameNumber(from date: Date) -> Int {
-        return Int(date.timeIntervalSince1970) % 2 + 1
+            VStack(alignment: .leading, spacing: 4) {
+                Text("\(context.state.steps) steps")
+                    .font(.headline)
+                    .foregroundColor(.white)
+
+                Text(context.state.stateRaw.capitalized)
+                    .font(.caption)
+                    .foregroundColor(.white.opacity(0.7))
+            }
+
+            Spacer()
+        }
+        .padding()
+        .activityBackgroundTint(.black)
     }
 }
 
@@ -87,15 +87,14 @@ private struct ExpandedLeadingView: View {
     let context: ActivityViewContext<PixelPalAttributes>
 
     var body: some View {
-        TimelineView(.periodic(every: 0.8)) { timeline in
-            let frame = Int(timeline.date.timeIntervalSince1970) % 2 + 1
-            let spriteName = SpriteAssets.spriteName(
-                genderRaw: context.state.genderRaw,
-                stateRaw: context.state.stateRaw,
-                frame: frame
-            )
+        let spriteName = SpriteAssets.spriteName(
+            genderRaw: context.state.genderRaw,
+            stateRaw: context.state.stateRaw,
+            frame: context.state.frame
+        )
 
-            Image(spriteName)
+        if let uiImage = UIImage(named: spriteName) {
+            Image(uiImage: uiImage)
                 .interpolation(.none)
                 .resizable()
                 .scaledToFit()
@@ -145,15 +144,14 @@ private struct CompactLeadingView: View {
     let context: ActivityViewContext<PixelPalAttributes>
 
     var body: some View {
-        TimelineView(.periodic(every: 0.8)) { timeline in
-            let frame = Int(timeline.date.timeIntervalSince1970) % 2 + 1
-            let spriteName = SpriteAssets.spriteName(
-                genderRaw: context.state.genderRaw,
-                stateRaw: context.state.stateRaw,
-                frame: frame
-            )
+        let spriteName = SpriteAssets.spriteName(
+            genderRaw: context.state.genderRaw,
+            stateRaw: context.state.stateRaw,
+            frame: context.state.frame
+        )
 
-            Image(spriteName)
+        if let uiImage = UIImage(named: spriteName) {
+            Image(uiImage: uiImage)
                 .interpolation(.none)
                 .resizable()
                 .scaledToFit()
@@ -178,15 +176,14 @@ private struct MinimalView: View {
     let context: ActivityViewContext<PixelPalAttributes>
 
     var body: some View {
-        TimelineView(.periodic(every: 0.8)) { timeline in
-            let frame = Int(timeline.date.timeIntervalSince1970) % 2 + 1
-            let spriteName = SpriteAssets.spriteName(
-                genderRaw: context.state.genderRaw,
-                stateRaw: context.state.stateRaw,
-                frame: frame
-            )
+        let spriteName = SpriteAssets.spriteName(
+            genderRaw: context.state.genderRaw,
+            stateRaw: context.state.stateRaw,
+            frame: context.state.frame
+        )
 
-            Image(spriteName)
+        if let uiImage = UIImage(named: spriteName) {
+            Image(uiImage: uiImage)
                 .interpolation(.none)
                 .resizable()
                 .scaledToFit()

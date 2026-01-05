@@ -3,15 +3,22 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 63;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		248AA15392062E5311E8A316 /* SpriteAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1246A844986E4ACC8377EA02 /* SpriteAssets.swift */; };
+		28FE31C44F66314E135FF4C4 /* SpriteTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD67B29F20CAA37948EF7B71 /* SpriteTestView.swift */; };
+		3ECC1506A563B06A91DB663C /* LiveActivityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745CCED679F3C3012D8C2D63 /* LiveActivityManager.swift */; };
+		43C40C47F64858351D3908B1 /* PixelPalAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3AFE03958D1F1763057DF2 /* PixelPalAttributes.swift */; };
+		551372C4FCC1308BAC5F04A6 /* PixelPalLiveActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408C1419A289E32506A0FD5D /* PixelPalLiveActivity.swift */; };
 		573661548BC773E345D6E7B7 /* AvatarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31111F67A20DEA73284CFADE /* AvatarState.swift */; };
 		619550A947B1C104E1BE8F2E /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2653A27B8EC65641F8E05113 /* AvatarView.swift */; };
+		6658A943F43088445A263B19 /* SpriteAssets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1246A844986E4ACC8377EA02 /* SpriteAssets.swift */; };
 		725852DFA9CD2C6530EC5382 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADAF4175CCA880FD8360146 /* Assets.xcassets */; };
 		9D06169DC5A0A607C2E17868 /* PixelPalApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF3F482259C11E0395EAF877 /* PixelPalApp.swift */; };
 		9DC11070A2086F6D12805C7D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DADAF4175CCA880FD8360146 /* Assets.xcassets */; };
+		A09B89D3D559A53A4774D30B /* PixelPalAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A3AFE03958D1F1763057DF2 /* PixelPalAttributes.swift */; };
 		A11B91BA815EE5EE92A64BEA /* AvatarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31111F67A20DEA73284CFADE /* AvatarState.swift */; };
 		A770905C6C15C185B6C3E239 /* PixelPalWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = E7F4E2C23ABF9DC1488D48D1 /* PixelPalWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B3A35534E37A839317E0EF6F /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E519BE6660525645B147F2 /* OnboardingView.swift */; };
@@ -47,19 +54,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1246A844986E4ACC8377EA02 /* SpriteAssets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteAssets.swift; sourceTree = "<group>"; };
 		14D7A15A9E35F8F26F6494F6 /* HealthKitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitManager.swift; sourceTree = "<group>"; };
 		2653A27B8EC65641F8E05113 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		31111F67A20DEA73284CFADE /* AvatarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarState.swift; sourceTree = "<group>"; };
-		3AEE1BB9935EE63BBFF36B65 /* PixelPal.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = PixelPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3AEE1BB9935EE63BBFF36B65 /* PixelPal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PixelPal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3FA7D59972E31E79CE571CE4 /* SharedData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharedData.swift; sourceTree = "<group>"; };
+		408C1419A289E32506A0FD5D /* PixelPalLiveActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelPalLiveActivity.swift; sourceTree = "<group>"; };
 		5542166A0FFA6D6A68D08619 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		5A3AFE03958D1F1763057DF2 /* PixelPalAttributes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelPalAttributes.swift; sourceTree = "<group>"; };
+		745CCED679F3C3012D8C2D63 /* LiveActivityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityManager.swift; sourceTree = "<group>"; };
 		7FA22598690D7C0D49A27547 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		99FF220DED6D751C948CDF10 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		B9E519BE6660525645B147F2 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		BF3F482259C11E0395EAF877 /* PixelPalApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelPalApp.swift; sourceTree = "<group>"; };
 		CA88720284FDF04E6199B7F1 /* PixelPalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelPalWidget.swift; sourceTree = "<group>"; };
 		DADAF4175CCA880FD8360146 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		E7F4E2C23ABF9DC1488D48D1 /* PixelPalWidget.appex */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = "wrapper.app-extension"; path = PixelPalWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7F4E2C23ABF9DC1488D48D1 /* PixelPalWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PixelPalWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD67B29F20CAA37948EF7B71 /* SpriteTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXGroup section */
@@ -80,6 +92,7 @@
 				2653A27B8EC65641F8E05113 /* AvatarView.swift */,
 				5542166A0FFA6D6A68D08619 /* ContentView.swift */,
 				B9E519BE6660525645B147F2 /* OnboardingView.swift */,
+				FD67B29F20CAA37948EF7B71 /* SpriteTestView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -87,6 +100,7 @@
 		2CD5640EB3415C4ECACD44C8 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				408C1419A289E32506A0FD5D /* PixelPalLiveActivity.swift */,
 				CA88720284FDF04E6199B7F1 /* PixelPalWidget.swift */,
 			);
 			name = Sources;
@@ -118,7 +132,10 @@
 			children = (
 				31111F67A20DEA73284CFADE /* AvatarState.swift */,
 				14D7A15A9E35F8F26F6494F6 /* HealthKitManager.swift */,
+				745CCED679F3C3012D8C2D63 /* LiveActivityManager.swift */,
+				5A3AFE03958D1F1763057DF2 /* PixelPalAttributes.swift */,
 				3FA7D59972E31E79CE571CE4 /* SharedData.swift */,
+				1246A844986E4ACC8377EA02 /* SpriteAssets.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -229,7 +246,6 @@
 			);
 			mainGroup = 3024BA8FD76C44C9AE7BB63B;
 			minimizedProjectReferenceProxies = 1;
-			preferredProjectObjectVersion = 77;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -264,8 +280,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				573661548BC773E345D6E7B7 /* AvatarState.swift in Sources */,
+				43C40C47F64858351D3908B1 /* PixelPalAttributes.swift in Sources */,
+				551372C4FCC1308BAC5F04A6 /* PixelPalLiveActivity.swift in Sources */,
 				DF73DA9586670CB2AC0E33A6 /* PixelPalWidget.swift in Sources */,
 				D399A6764170BB79F3E1D50B /* SharedData.swift in Sources */,
+				248AA15392062E5311E8A316 /* SpriteAssets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,9 +296,13 @@
 				619550A947B1C104E1BE8F2E /* AvatarView.swift in Sources */,
 				C4F94B8F1FB8CEA13AB72A8A /* ContentView.swift in Sources */,
 				F21FAFDCE4A55D883F18EED3 /* HealthKitManager.swift in Sources */,
+				3ECC1506A563B06A91DB663C /* LiveActivityManager.swift in Sources */,
 				B3A35534E37A839317E0EF6F /* OnboardingView.swift in Sources */,
 				9D06169DC5A0A607C2E17868 /* PixelPalApp.swift in Sources */,
+				A09B89D3D559A53A4774D30B /* PixelPalAttributes.swift in Sources */,
 				C1C340D388C5BBE62157941C /* SharedData.swift in Sources */,
+				6658A943F43088445A263B19 /* SpriteAssets.swift in Sources */,
+				28FE31C44F66314E135FF4C4 /* SpriteTestView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -299,6 +322,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = PixelPalWidget/PixelPalWidget.entitlements;
+				DEVELOPMENT_TEAM = 6AU8GNH8CT;
 				INFOPLIST_FILE = PixelPalWidget/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -317,6 +341,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = PixelPalWidget/PixelPalWidget.entitlements;
+				DEVELOPMENT_TEAM = 6AU8GNH8CT;
 				INFOPLIST_FILE = PixelPalWidget/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -336,6 +361,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PixelPal/PixelPal.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6AU8GNH8CT;
 				INFOPLIST_FILE = PixelPal/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -399,7 +425,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -458,7 +484,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
 				MARKETING_VERSION = 1.0.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -476,6 +502,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = PixelPal/PixelPal.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 6AU8GNH8CT;
 				INFOPLIST_FILE = PixelPal/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

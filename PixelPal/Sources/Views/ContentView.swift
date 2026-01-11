@@ -7,8 +7,6 @@ struct ContentView: View {
 
     @State private var avatarState: AvatarState = .low
     @State private var gender: Gender = .male
-    @State private var isDemoWalking: Bool = false
-    @State private var demoSteps: Int = 0
     @State private var showPaywall: Bool = false
 
     // Phase tracking
@@ -140,7 +138,6 @@ struct ContentView: View {
             if liveActivityManager.isActive {
                 Button(action: {
                     liveActivityManager.endActivity()
-                    stopDemoWalking()
                 }) {
                     HStack {
                         Image(systemName: "stop.circle.fill")
@@ -155,29 +152,9 @@ struct ContentView: View {
                 }
                 .padding(.horizontal, 40)
 
-                // Demo Walking Button
-                Button(action: {
-                    if isDemoWalking {
-                        stopDemoWalking()
-                    } else {
-                        startDemoWalking()
-                    }
-                }) {
-                    HStack {
-                        Image(systemName: isDemoWalking ? "figure.stand" : "figure.walk")
-                        Text(isDemoWalking ? "Stop Demo" : "Demo Walking")
-                    }
-                    .font(.subheadline)
-                    .foregroundColor(isDemoWalking ? .black : .white)
-                    .padding(.horizontal, 20)
-                    .padding(.vertical, 10)
-                    .background(isDemoWalking ? Color.yellow : Color.blue.opacity(0.8))
-                    .cornerRadius(8)
-                }
-
-                Text(isDemoWalking ? "Walking animation active!" : "Live Activity is running")
+                Text("Live Activity is running")
                     .font(.caption)
-                    .foregroundColor(isDemoWalking ? .yellow : .green.opacity(0.8))
+                    .foregroundColor(.green.opacity(0.8))
             } else {
                 Button(action: {
                     liveActivityManager.startActivity(
@@ -204,6 +181,15 @@ struct ContentView: View {
                     .font(.caption)
                     .foregroundColor(.gray)
             }
+
+            // Debug: Test Paywall (remove before App Store submission)
+            #if DEBUG
+            Button(action: { showPaywall = true }) {
+                Text("Test Paywall")
+                    .font(.caption2)
+                    .foregroundColor(.purple.opacity(0.6))
+            }
+            #endif
         }
     }
 
@@ -286,8 +272,8 @@ struct ContentView: View {
             progress.totalStepsSinceStart = cumulativeSteps
         }
 
-        // Update Live Activity if active (but not during demo)
-        if liveActivityManager.isActive && !isDemoWalking {
+        // Update Live Activity if active
+        if liveActivityManager.isActive {
             liveActivityManager.updateActivity(
                 steps: Int(healthManager.currentSteps),
                 state: newState,
@@ -295,51 +281,6 @@ struct ContentView: View {
                 phase: currentPhase,
                 cumulativeSteps: cumulativeSteps
             )
-        }
-    }
-
-    // MARK: - Demo Walking
-
-    private func startDemoWalking() {
-        isDemoWalking = true
-        demoSteps = Int(healthManager.currentSteps)
-
-        // Start simulating step increases to trigger walking animation
-        simulateWalking()
-    }
-
-    private func stopDemoWalking() {
-        isDemoWalking = false
-        // Update with actual steps to stop walking animation
-        if liveActivityManager.isActive {
-            liveActivityManager.updateActivity(
-                steps: Int(healthManager.currentSteps),
-                state: avatarState,
-                gender: gender,
-                phase: currentPhase,
-                cumulativeSteps: cumulativeSteps
-            )
-        }
-    }
-
-    private func simulateWalking() {
-        guard isDemoWalking else { return }
-
-        // Increment demo steps to trigger walking detection
-        demoSteps += 1
-
-        // Update live activity with incremented steps
-        liveActivityManager.updateActivity(
-            steps: demoSteps,
-            state: avatarState,
-            gender: gender,
-            phase: currentPhase,
-            cumulativeSteps: cumulativeSteps + (demoSteps - Int(healthManager.currentSteps))
-        )
-
-        // Continue simulating after a short delay
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [self] in
-            simulateWalking()
         }
     }
 }

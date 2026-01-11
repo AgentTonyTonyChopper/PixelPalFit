@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Pal - iPhone 16 Pro Max Simulator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f0f1a 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', sans-serif;
+        }
+
+        h1 {
+            color: white;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.5);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        /* iPhone 16 Pro Max Frame */
+        /* Actual: 163mm x 77.6mm, ~2.1:1 ratio */
+        /* Screen: 2868x1320 pixels */
+        /* Scaled for browser: 430px x 932px (matching CSS logical pixels) */
+
+        .iphone-container {
+            display: flex;
+            gap: 40px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .iphone-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .iphone-label {
+            color: rgba(255,255,255,0.7);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .iphone-frame {
+            width: 293px;
+            height: 600px;
+            background: #1c1c1e;
+            border-radius: 55px;
+            padding: 12px;
+            box-shadow:
+                0 0 0 2px #2c2c2e,
+                0 0 0 4px #1c1c1e,
+                0 25px 50px rgba(0,0,0,0.5),
+                inset 0 0 2px rgba(255,255,255,0.1);
+            position: relative;
+        }
+
+        .iphone-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            border-radius: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Dynamic Island */
+        .dynamic-island {
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #000;
+            border-radius: 24px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* Compact Dynamic Island (default pill) */
+        .dynamic-island.compact {
+            width: 126px;
+            height: 37px;
+            padding: 0 12px;
+            justify-content: space-between;
+        }
+
+        /* Expanded Dynamic Island */
+        .dynamic-island.expanded {
+            width: 245px;
+            height: 160px;
+            border-radius: 44px;
+            flex-direction: column;
+            padding: 16px;
+            top: 12px;
+        }
+
+        /* Minimal Dynamic Island (just the pill) */
+        .dynamic-island.minimal {
+            width: 37px;
+            height: 37px;
+            border-radius: 50%;
+            padding: 6px;
+        }
+
+        .di-compact-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .di-compact-sprite {
+            width: 28px;
+            height: 28px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            object-fit: contain;
+        }
+
+        .di-compact-steps {
+            font-size: 13px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .di-expanded-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            width: 100%;
+            height: 100%;
+        }
+
+        .di-expanded-steps-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .di-expanded-steps {
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            line-height: 1;
+        }
+
+        .di-expanded-label {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+            margin-top: 2px;
+        }
+
+        .di-expanded-sprite-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .di-expanded-sprite {
+            width: 100px;
+            height: 100px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            object-fit: contain;
+        }
+
+        .di-minimal-sprite {
+            width: 24px;
+            height: 24px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            object-fit: contain;
+        }
+
+        /* Lock Screen */
+        .lock-screen {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #1a1a3e 0%, #0a0a1a 100%);
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+        }
+
+        .lock-time {
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .lock-time-text {
+            font-size: 72px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -2px;
+        }
+
+        .lock-date {
+            text-align: center;
+            font-size: 17px;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        /* Lock Screen Widget */
+        .lock-widget {
+            margin: 0 20px;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 22px;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .lock-widget-sprite {
+            width: 56px;
+            height: 56px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            object-fit: contain;
+        }
+
+        .lock-widget-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .lock-widget-steps {
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .lock-widget-status {
+            font-size: 14px;
+            color: rgba(74, 222, 128, 0.9);
+        }
+
+        /* Live Activity Banner (Lock Screen) */
+        .live-activity-banner {
+            margin: 20px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 16px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .banner-sprite {
+            width: 48px;
+            height: 48px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            object-fit: contain;
+        }
+
+        .banner-info {
+            flex: 1;
+        }
+
+        .banner-steps {
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+        }
+
+        .banner-status {
+            font-size: 13px;
+            color: #4ade80;
+        }
+
+        /* Home Screen with App */
+        .home-screen {
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:%231a1a3e"/><stop offset="100%" style="stop-color:%230a0a1a"/></linearGradient></defs><rect fill="url(%23g)" width="100" height="100"/></svg>');
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            padding-top: 60px;
+        }
+
+        /* StandBy Mode (Horizontal) */
+        .standby-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .iphone-frame.landscape {
+            width: 600px;
+            height: 293px;
+        }
+
+        .standby-screen {
+            width: 100%;
+            height: 100%;
+            background: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .standby-widget {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .standby-sprite {
+            width: 120px;
+            height: 120px;
+            image-rendering: pixelated;
+            image-rendering: crisp-edges;
+            object-fit: contain;
+        }
+
+        .standby-steps {
+            font-size: 48px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .standby-label {
+            font-size: 16px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .standby-time {
+            font-size: 140px;
+            font-weight: 700;
+            color: #ff6b35;
+            letter-spacing: -4px;
+        }
+
+        /* Controls */
+        .controls {
+            margin-top: 30px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-primary {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #fbbf24;
+            color: black;
+        }
+
+        .btn-toggle {
+            background: #22c55e;
+            color: white;
+        }
+
+        .btn-active {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 16px;
+            color: rgba(255,255,255,0.6);
+            font-size: 12px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .dot-green { background: #4ade80; }
+        .dot-blue { background: #3b82f6; }
+        .dot-yellow { background: #fbbf24; }
+
+        /* Notch camera/sensors for realism */
+        .dynamic-island::before {
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #1a1a1a;
+            border-radius: 50%;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: inset 0 0 2px rgba(255,255,255,0.1);
+        }
+
+        .dynamic-island.expanded::before {
+            left: 28px;
+            top: 28px;
+            transform: none;
+        }
+
+        .dynamic-island.minimal::before {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pixel Pal - iPhone 16 Pro Max Simulator</h1>
+    <p class="subtitle">Realistic preview of all UI states with 24-frame walking animation</p>
+
+    <div class="iphone-container">
+        <!-- Dynamic Island Compact -->
+        <div class="iphone-wrapper">
+            <div class="iphone-label">Dynamic Island - Compact</div>
+            <div class="iphone-frame">
+                <div class="iphone-screen">
+                    <div class="dynamic-island compact">
+                        <div class="di-compact-content">
+                            <img class="di-compact-sprite" id="compactSprite" src="" alt="">
+                            <span class="di-compact-steps" id="compactSteps">1,247</span>
+                        </div>
+                    </div>
+                    <div class="home-screen"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Island Expanded -->
+        <div class="iphone-wrapper">
+            <div class="iphone-label">Dynamic Island - Expanded</div>
+            <div class="iphone-frame">
+                <div class="iphone-screen">
+                    <div class="dynamic-island expanded">
+                        <div class="di-expanded-content">
+                            <div class="di-expanded-sprite-container">
+                                <img class="di-expanded-sprite" id="expandedSprite" src="" alt="">
+                            </div>
+                            <div class="di-expanded-steps-container">
+                                <span class="di-expanded-steps" id="expandedSteps">1,247</span>
+                                <span class="di-expanded-label">steps</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="home-screen"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Island Minimal -->
+        <div class="iphone-wrapper">
+            <div class="iphone-label">Dynamic Island - Minimal</div>
+            <div class="iphone-frame">
+                <div class="iphone-screen">
+                    <div class="dynamic-island minimal">
+                        <img class="di-minimal-sprite" id="minimalSprite" src="" alt="">
+                    </div>
+                    <div class="home-screen"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lock Screen with Widget -->
+        <div class="iphone-wrapper">
+            <div class="iphone-label">Lock Screen Widget</div>
+            <div class="iphone-frame">
+                <div class="iphone-screen">
+                    <div class="dynamic-island compact">
+                        <div class="di-compact-content">
+                            <img class="di-compact-sprite" id="lockCompactSprite" src="" alt="">
+                            <span class="di-compact-steps" id="lockCompactSteps">1,247</span>
+                        </div>
+                    </div>
+                    <div class="lock-screen">
+                        <div class="lock-time">
+                            <span class="lock-time-text" id="lockTime">9:41</span>
+                        </div>
+                        <div class="lock-date" id="lockDate">Tuesday, January 7</div>
+                        <div class="lock-widget">
+                            <img class="lock-widget-sprite" id="lockWidgetSprite" src="" alt="">
+                            <div class="lock-widget-info">
+                                <span class="lock-widget-steps" id="lockWidgetSteps">1,247 steps</span>
+                                <span class="lock-widget-status">Walking...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lock Screen Live Activity Banner -->
+        <div class="iphone-wrapper">
+            <div class="iphone-label">Live Activity Banner</div>
+            <div class="iphone-frame">
+                <div class="iphone-screen">
+                    <div class="dynamic-island compact">
+                        <div class="di-compact-content">
+                            <img class="di-compact-sprite" id="bannerCompactSprite" src="" alt="">
+                            <span class="di-compact-steps" id="bannerCompactSteps">1,247</span>
+                        </div>
+                    </div>
+                    <div class="lock-screen">
+                        <div class="lock-time">
+                            <span class="lock-time-text">9:41</span>
+                        </div>
+                        <div class="lock-date">Tuesday, January 7</div>
+                        <div class="live-activity-banner">
+                            <img class="banner-sprite" id="bannerSprite" src="" alt="">
+                            <div class="banner-info">
+                                <div class="banner-steps" id="bannerSteps">1,247 steps</div>
+                                <div class="banner-status">Walking...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- StandBy Mode -->
+    <div class="iphone-wrapper" style="margin-top: 40px;">
+        <div class="iphone-label">StandBy Mode (Landscape)</div>
+        <div class="iphone-frame landscape">
+            <div class="iphone-screen">
+                <div class="standby-screen">
+                    <div class="standby-widget">
+                        <img class="standby-sprite" id="standbySprite" src="" alt="">
+                        <div>
+                            <span class="standby-steps" id="standbySteps">1,247</span>
+                            <span class="standby-label"> steps</span>
+                        </div>
+                    </div>
+                    <div class="standby-time" id="standbyTime">9:41</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn-toggle" id="toggleBtn" onclick="toggleAnimation()">Pause Animation</button>
+        <button class="btn-secondary" onclick="toggleGender()">Switch Gender</button>
+        <button class="btn-primary" onclick="simulateWalking()">Simulate Walking</button>
+    </div>
+
+    <div class="info-row">
+        <div class="info-item">
+            <div class="dot dot-green"></div>
+            <span>32 Frames @ 24fps</span>
+        </div>
+        <div class="info-item">
+            <div class="dot dot-blue"></div>
+            <span>Gender: <span id="genderLabel">Male</span></span>
+        </div>
+        <div class="info-item">
+            <div class="dot dot-yellow"></div>
+            <span>Frame: <span id="frameNum">1</span>/16</span>
+        </div>
+    </div>
+
+    <script>
+        const basePath = '../PixelPal/Resources/Assets.xcassets/';
+
+        let currentFrame = 1;
+        const totalFrames = 32;
+        let gender = 'male';
+        let isAnimating = true;
+        let steps = 1247;
+        let animationInterval;
+        let stepsInterval;
+
+        function getSpritePath(gender, frame) {
+            return `${basePath}${gender}_walking_${frame}.imageset/${gender}_walking_${frame}.png`;
+        }
+
+        function updateAllSprites() {
+            const path = getSpritePath(gender, currentFrame);
+
+            // Update all sprite elements
+            document.getElementById('compactSprite').src = path;
+            document.getElementById('expandedSprite').src = path;
+            document.getElementById('minimalSprite').src = path;
+            document.getElementById('lockCompactSprite').src = path;
+            document.getElementById('lockWidgetSprite').src = path;
+            document.getElementById('bannerCompactSprite').src = path;
+            document.getElementById('bannerSprite').src = path;
+            document.getElementById('standbySprite').src = path;
+
+            document.getElementById('frameNum').textContent = currentFrame;
+        }
+
+        function updateSteps() {
+            const formatted = steps.toLocaleString();
+
+            document.getElementById('compactSteps').textContent = formatted;
+            document.getElementById('expandedSteps').textContent = formatted;
+            document.getElementById('lockCompactSteps').textContent = formatted;
+            document.getElementById('lockWidgetSteps').textContent = `${formatted} steps`;
+            document.getElementById('bannerCompactSteps').textContent = formatted;
+            document.getElementById('bannerSteps').textContent = `${formatted} steps`;
+            document.getElementById('standbySteps').textContent = formatted;
+        }
+
+        function updateTime() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+            const timeStr = `${hours}:${minutes}`;
+
+            document.getElementById('lockTime').textContent = timeStr;
+            document.getElementById('standbyTime').textContent = timeStr;
+
+            const options = { weekday: 'long', month: 'long', day: 'numeric' };
+            document.getElementById('lockDate').textContent = now.toLocaleDateString('en-US', options);
+        }
+
+        function nextFrame() {
+            currentFrame = (currentFrame % totalFrames) + 1;
+            updateAllSprites();
+        }
+
+        function toggleAnimation() {
+            const btn = document.getElementById('toggleBtn');
+            if (isAnimating) {
+                clearInterval(animationInterval);
+                btn.textContent = 'Resume Animation';
+                btn.classList.remove('btn-toggle');
+                btn.classList.add('btn-primary');
+            } else {
+                startAnimation();
+                btn.textContent = 'Pause Animation';
+                btn.classList.remove('btn-primary');
+                btn.classList.add('btn-toggle');
+            }
+            isAnimating = !isAnimating;
+        }
+
+        function toggleGender() {
+            gender = gender === 'male' ? 'female' : 'male';
+            document.getElementById('genderLabel').textContent = gender.charAt(0).toUpperCase() + gender.slice(1);
+            updateAllSprites();
+        }
+
+        function simulateWalking() {
+            // Increment steps rapidly for a few seconds
+            let count = 0;
+            const walkInterval = setInterval(() => {
+                steps++;
+                updateSteps();
+                count++;
+                if (count > 20) {
+                    clearInterval(walkInterval);
+                }
+            }, 100);
+        }
+
+        function startAnimation() {
+            // 32 frames at 42ms = 24fps
+            animationInterval = setInterval(nextFrame, 42);
+        }
+
+        // Initialize
+        updateAllSprites();
+        updateSteps();
+        updateTime();
+        startAnimation();
+
+        // Update time every minute
+        setInterval(updateTime, 60000);
+    </script>
+</body>
+</html>

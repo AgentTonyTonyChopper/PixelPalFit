@@ -30,6 +30,7 @@
 		C2E1F1D1ADEB25DD80B66973 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF788C818F6E15916C70D470 /* StoreManager.swift */; };
 		C3CB744F51A434A81240177D /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B49915AC14485645966E700 /* PersistenceManager.swift */; };
 		C4F94B8F1FB8CEA13AB72A8A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5542166A0FFA6D6A68D08619 /* ContentView.swift */; };
+		D2D486A9974CA0F549F25F72 /* StoreKitConfiguration.storekit in Resources */ = {isa = PBXBuildFile; fileRef = EAEDCAE437D2D8EA78AA13C6 /* StoreKitConfiguration.storekit */; };
 		D399A6764170BB79F3E1D50B /* SharedData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FA7D59972E31E79CE571CE4 /* SharedData.swift */; };
 		DF73DA9586670CB2AC0E33A6 /* PixelPalWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA88720284FDF04E6199B7F1 /* PixelPalWidget.swift */; };
 		E2E8A154E9FDE1ABC4BBABEB /* PaywallView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3157C85A8550A2AE1E0590F9 /* PaywallView.swift */; };
@@ -88,6 +89,7 @@
 		CA88720284FDF04E6199B7F1 /* PixelPalWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixelPalWidget.swift; sourceTree = "<group>"; };
 		DADAF4175CCA880FD8360146 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7F4E2C23ABF9DC1488D48D1 /* PixelPalWidget.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = PixelPalWidget.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		EAEDCAE437D2D8EA78AA13C6 /* StoreKitConfiguration.storekit */ = {isa = PBXFileReference; lastKnownFileType = text; path = StoreKitConfiguration.storekit; sourceTree = "<group>"; };
 		EFE30B86A68126E5C613F077 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		FD67B29F20CAA37948EF7B71 /* SpriteTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteTestView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -205,6 +207,7 @@
 				DADAF4175CCA880FD8360146 /* Assets.xcassets */,
 				99FF220DED6D751C948CDF10 /* Info.plist */,
 				C88158955ACFCD0EE6258C50 /* PrivacyInfo.xcprivacy */,
+				EAEDCAE437D2D8EA78AA13C6 /* StoreKitConfiguration.storekit */,
 			);
 			name = Resources;
 			path = PixelPal/Resources;
@@ -305,6 +308,7 @@
 			files = (
 				9DC11070A2086F6D12805C7D /* Assets.xcassets in Resources */,
 				E617159148705446FF1BFDBC /* PrivacyInfo.xcprivacy in Resources */,
+				D2D486A9974CA0F549F25F72 /* StoreKitConfiguration.storekit in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
